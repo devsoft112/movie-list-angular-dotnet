@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  movieapi:
+    image: movieapi:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MovieDbConnection=Host=db;Database=movie_db;Username=postgres;Password=l^2~e1uJLj*n
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: l^2~e1uJLj*n
+      POSTGRES_DB: movie_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
