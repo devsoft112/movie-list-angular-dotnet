@@ -139,28 +139,8 @@ ng serve
 
 - The application should be running on http://localhost:4200.
 
-### Running in Production Mode
-
-To build the Angular application for production:
-
-```bash
-ng build --prod
-```
-
-The production-ready files will be generated in the `dist/` directory.
-
 ## Assumptions and Design Decisions
 
 - **Data Seeding:** The database is seeded with initial movies to simplify testing and validation.
 - **Error Handling:** Basic error handling is implemented for both API and UI to manage common scenarios.
 - **Validation:** Form validation is implemented on the front-end to ensure that all required fields are filled before submission.
-
-## Future Improvements
-
-- **Authentication:** Implement user authentication for movie creation.
-- **Pagination:** Add pagination to the movies list to handle a large number of entries.
-- **Testing:** Improve unit testing coverage for both the API and UI components.
-
-## Conclusion
-
-This application demonstrates proficiency in full-stack development using Angular and .NET. It adheres to the principles of clean code, proper architecture, and functional completeness.
