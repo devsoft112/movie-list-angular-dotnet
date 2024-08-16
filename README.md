@@ -1,146 +1,98 @@
 # Movie List Application
 
-This application is a comprehensive, full-stack movie viewing platform developed with Angular 18 for front-end and .NET 8 for back-end. It provides users with the ability to view a list of movies and add new ones by providing a title, description, genre, and cover image. The back-end API manages movie data stored in an SQL database.
+This application is a full-stack movie viewer developed with Angular 18 and .NET 8. It enables users to view, create, update, and delete movies, each with a title, description, genre, and cover image. The back-end API manages movie data stored in an SQL database.
+
+## Features
+
+### Front-End
+
+- **Movie List**: Displays all movies in a paginated format.
+- **Movie Detail View**: Shows detailed information about each movie.
+- **CRUD Operations**: Allows users to create, update, and delete movies.
+- **Drag-and-Drop Image Upload**: Users can set a movie's cover image by dragging and dropping an image file.
+- **Responsive Design**: Optimized for a wide range of devices.
+- **Loading Indicators**: Displayed while data is being fetched or submitted.
+- **Error Messages**: Handles and displays error messages for validation failures and other issues.
+
+### Back-End
+
+- **RESTful API**: Manages movies with GET, POST, PUT, and DELETE operations.
+- **Image Handling**: Supports uploading and managing movie cover images.
+- **Sorting and Pagination**: Allows sorting of movies by Id and supports pagination.
+- **Swagger Integration**: Provides interactive API documentation.
+- **Data Seeding**: Seeds the database with initial movie data.
+- **CORS Configuration**: Allows cross-origin requests from the front-end application.
 
 ## Project Structure
 
 The project is divided into two main parts:
 
-### 1. MovieAPI (Back-End)
-- **Framework:** C# .NET 8
-- **Functionality:**
-  - RESTful API with the following endpoints:
-    - GET /api/movies: Retrieve a list of movies.
-    - POST /api/movies: Create a new movie.
-    - PUT /api/movies/{id}: Update a movie.
-    - DELETE /api/movies/{id}: Delete a movie.
-  - Uses Entity Framework Core 8 for database operations.
-  - Data seeding with initial movies for easier testing and development.
-  - Docker support for containerized deployment.
+- **MovieAPI (Back-End)**
+  - Framework: C# .NET 8
+  - Functionality: RESTful API, Entity Framework Core 8 for database operations, Docker support, Swagger documentation, sorting and pagination support.
+- **MovieAppUI (Front-End)**
+  - Framework: Angular 18
+  - Functionality: Displays list of movies, provides forms for movie creation and editing, uses Angular Material for UI components and styling, supports search and filtering.
 
-### 2. MovieAppUI (Front-End)
-- **Framework:** Angular 18
-- **Functionality:**
-  - Displays a list of movies with their title, description, genre, and cover image.
-  - Allows users to view detailed information about each movie.
-  - A form to create or edit a movie, with form validation for required fields.
-  - Utilizes Angular Material for UI components and styling.
-  - Includes drag-and-drop functionality for uploading movie cover images.
+## Technologies Used
 
-## Front-End Features
+- .NET 8.0
+- Angular 18
+- Entity Framework Core (PostgreSQL)
+- Swashbuckle (Swagger)
+- Docker
+- PostgreSQL
 
-- **Movie List:** Displays all available movies in a paginated format. Users can click on any movie to view more details.
-- **Movie Detail View:** Provides comprehensive information about a selected movie.
-- **CRUD Operations:** Users can create, update, and delete movies. The form includes validation to ensure all necessary fields are completed before submission.
-- **Drag-and-Drop Image Upload:** Users can drag and drop an image file to set the movie's cover image, with an option to preview the image before submission.
-- **Responsive Design:** The application is fully responsive, providing an optimal viewing experience across a wide range of devices.
-
-## Angular Component Overview
-
-- **MoviesListComponent:** Displays a list of all movies with pagination controls and options to edit or delete movies.
-- **MovieDetailComponent:** Shows detailed information for a selected movie and provides options to edit or delete the movie.
-- **CreateMovieComponent:** Contains the form for creating a new movie or editing an existing one, including drag-and-drop functionality for image uploads.
-- **ConfirmDialogComponent:** A modal dialog used for confirming the deletion of a movie.
-
-## Styling and Theming
-
-- **Dark Theme:** The application uses a dark theme to provide a modern and visually appealing interface. Custom SCSS styles are applied to Angular Material components to maintain a consistent look and feel.
-- **Component Styling:** Each component has its own SCSS file to manage styling, allowing for modular and maintainable design.
-
-## Getting Started
+## Setup Instructions
 
 ### Prerequisites
 
-- .NET 8 SDK: Ensure that .NET 8 SDK is installed on your machine.
-- Node.js: Install Node.js to manage npm packages for the Angular project.
-- Docker (Optional): To run the application in a containerized environment.
-- PostgreSQL (Optional): If running without Docker.
+- .NET 8 SDK
+- Node.js
+- Docker (Optional)
+- PostgreSQL (Optional)
 
-### Setup Instructions
+### Option 1: Running with Docker for .NET Backend
 
-#### Option 1: Running with Docker
+1. Navigate to the root directory of .net backend: `cd sb-space-angular18-dotnet8\MovieAPI`
+2. Build and run the Docker containers: `docker-compose up --build -d`
+3. Access the API at http://localhost:5103 and Swagger UI at http://localhost:5103/index.html
 
-1. Navigate to the root directory:
+### Option 2: Running Without Docker
 
-```bash
-cd sb-space-angular18-dotnet8
-```
+#### Back-End (MovieAPI)
 
-2. Build and run the Docker containers:
+1. Set Up PostgreSQL: Ensure PostgreSQL is installed and running. Create a database named `movie_db`.
+2. Update the Connection String in `appsettings.json`.
+3. Run the Migrations: `dotnet ef database update`
+4. Run the API: `dotnet run`
+5. Access the API at http://localhost:5103 and Swagger UI at http://localhost:5103/index.html
 
-```bash
-docker-compose up --build -d
-```
+#### Front-End (MovieAppUI)
 
-3. Access the API:
+1. Navigate to the MovieAppUI directory: `cd sb-space-angular18-dotnet8/MovieAppUI`
+2. Install npm packages: `npm install`
+3. Run the Angular application: `ng serve`
+4. The application should be running on http://localhost:4200.
 
-- API: http://localhost:5103
-- Swagger UI: http://localhost:5103/index.html
+## API Endpoints
 
-4. Access the front-end:
+- GET /api/movies: Retrieves a paginated list of movies, sorted by Id.
+- GET /api/movies/{id}: Retrieves a specific movie by ID.
+- POST /api/movies: Creates a new movie.
+- PUT /api/movies/{id}: Updates an existing movie.
+- DELETE /api/movies/{id}: Deletes a movie by ID.
 
-- The application should be running on http://localhost:4200.
+## Swagger Documentation
 
-#### Option 2: Running Without Docker
+Swagger is integrated into this project for API documentation and testing. Access Swagger UI at http://localhost:5103/index.html.
 
-##### Back-End (MovieAPI)
+## Database Seeding
 
-1. Set Up PostgreSQL:
-   - Ensure PostgreSQL is installed and running on your machine.
-   - Create a database named movie_db.
-
-2. Update the Connection String:
-   - Modify the ConnectionStrings.MovieDbConnection in appsettings.json:
-
-```json
-"ConnectionStrings": {
-  "MovieDbConnection": "Host=localhost;Database=movie_db;Username=postgres;Password=yourpassword"
-}
-```
-
-3. Run the Migrations:
-
-```bash
-dotnet ef database update
-```
-
-4. Run the API:
-
-```bash
-dotnet run
-```
-
-5. Access the API:
-
-- API: http://localhost:5103
-- Swagger UI: http://localhost:5103/index.html
-
-##### Front-End (MovieAppUI)
-
-1. Navigate to the MovieAppUI directory:
-
-```bash
-cd sb-space-angular18-dotnet8/MovieAppUI
-```
-
-2. Install npm packages:
-
-```bash
-npm install
-```
-
-3. Run the Angular application:
-
-```bash
-ng serve
-```
-
-4. Access the front-end:
-
-- The application should be running on http://localhost:4200.
+The application seeds the database with initial data on startup if the database is empty. To modify the seed data, edit the `MovieSeedData.cs` file in the `Data/Seeding` folder.
 
 ## Assumptions and Design Decisions
 
-- **Data Seeding:** The database is seeded with initial movies to simplify testing and validation.
-- **Error Handling:** Basic error handling is implemented for both API and UI to manage common scenarios.
-- **Validation:** Form validation is implemented on the front-end to ensure that all required fields are filled before submission.
+- **Data Seeding**: The database is seeded with initial movies to simplify testing and validation.
+- **Error Handling**: Basic error handling is implemented for both API and UI to manage common scenarios.
+- **Validation**: Form validation is implemented on the front-end to ensure that all required fields are filled before submission.
