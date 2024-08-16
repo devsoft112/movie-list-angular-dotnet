@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 interface PaginatedMoviesResponse {
   items: any[];
   totalCount: number;
@@ -11,7 +13,7 @@ interface PaginatedMoviesResponse {
   providedIn: 'root',
 })
 export class MovieService {
-  private apiUrl = 'http://localhost:5103/api/movies';  // Adjust the base URL as necessary
+  private apiUrl = `${environment.baseURL}/api/movies`;
 
   constructor(private http: HttpClient) { }
   

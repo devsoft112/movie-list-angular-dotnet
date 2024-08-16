@@ -1,18 +1,42 @@
 <div class="movies-list-container">
   <div class="movies-list">
-    <app-movie-card
-      *ngFor="let movie of movies"
-      [movie]="movie"
-      (delete)="deleteMovie(movie.id)"
-    >
-    </app-movie-card>
+    <ng-container *ngIf="loading; else content">
+      <app-skeleton-movie-card
+        *ngFor="let n of skeletonArray"
+      ></app-skeleton-movie-card>
+    </ng-container>
+    <ng-template #content>
+      <ng-container *ngIf="errorMessage; else movieCards">
+        <div class="error-message">
+          <mat-icon>error_outline</mat-icon>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </ng-container>
+      <ng-template #movieCards>
+        <ng-container *ngIf="movies.length > 0; else noMovies">
+          <app-movie-card
+            *ngFor="let movie of movies"
+            [movie]="movie"
+            (delete)="deleteMovie(movie.id)"
+          ></app-movie-card>
+        </ng-container>
+        <ng-template #noMovies>
+          <div class="no-data-message">
+            <mat-icon>movie</mat-icon>
+            <p>No movies available. Please add some movies.</p>
+          </div>
+        </ng-template>
+      </ng-template>
+    </ng-template>
   </div>
 
+  <!-- Always display paginator, but disable it while loading or error -->
   <mat-paginator
+    *ngIf="movies.length > 0 && !errorMessage"
     [length]="totalMovies"
     [pageSize]="pageSize"
     [pageSizeOptions]="[5, 10, 25, 100]"
     (page)="onPageChange($event)"
-  >
-  </mat-paginator>
+    [disabled]="loading"
+  ></mat-paginator>
 </div>

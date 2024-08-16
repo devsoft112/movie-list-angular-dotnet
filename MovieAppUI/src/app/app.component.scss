@@ -1,7 +1,5 @@
 .dashboard-container {
     height: 100vh;
-    // overflow: hidden;
-    /* No extra scrollbars */
 }
 
 .sidebar {
@@ -17,6 +15,17 @@
     margin-bottom: 20px;
 }
 
+.nav-item {
+    display: flex;
+    align-items: center;
+    mat-icon {
+        margin-right: 10px;
+    }
+    p {
+        margin-bottom: 0;
+    }
+}
+
 .sidebar-footer {
     position: absolute;
     bottom: 20px;
@@ -30,40 +39,18 @@
     flex-direction: column;
     height: 100vh;
     overflow-y: auto;
-    /* Scrollbar only for this area */
 }
 
 .header-toolbar {
     flex-shrink: 0;
+    justify-content: flex-end;
     padding: 0 20px;
     height: 64px;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.8);
-    /* Adjust height as needed */
 }
 
 .content-area {
     flex: 1;
-    // padding: 20px;
-    // overflow-y: hidden;
-    /* No extra scrollbars in this area */
     display: flex;
     flex-direction: column;
-}
-
-.movies-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    flex: 1;
-    /* Fill available space */
-    overflow-y: hidden;
-    /* Ensure no scrollbar for movie list */
-}
-
-mat-paginator {
-    margin-top: 20px;
-    padding: 10px 0;
-    background-color: #fff;
-    /* Prevents overlap */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }

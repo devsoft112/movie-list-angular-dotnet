@@ -56,6 +56,7 @@
       [src]="coverImagePreview"
       alt="Cover Image Preview"
       class="image-preview"
+      (error)="onImageError($event)"
     />
     <button mat-button color="warn" (click)="removeImage($event)">
       Remove Image

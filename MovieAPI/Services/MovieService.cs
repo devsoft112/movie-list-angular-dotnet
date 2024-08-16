@@ -11,8 +11,8 @@ namespace MovieAPI.Services
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;
-        private readonly string _imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "..", "MovieAppUI", "public");
-        private readonly string _imagePathPrefix = "./";
+        private readonly string _imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+        private readonly string _imagePathPrefix = "/images/";
 
         public MovieService(IMovieRepository movieRepository)
         {

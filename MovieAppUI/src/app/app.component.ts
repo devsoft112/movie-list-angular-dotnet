@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
@@ -25,4 +26,12 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AppComponent {
   title = 'MovieAppUI';
+
+  isSmallScreen = false;
+
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result => {
+      this.isSmallScreen = result.matches;
+    });
+  }
 }

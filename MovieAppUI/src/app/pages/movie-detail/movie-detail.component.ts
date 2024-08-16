@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -16,6 +18,8 @@ import { MatChipsModule } from '@angular/material/chips';
 })
 export class MovieDetailComponent implements OnInit {
   movie: any;
+  baseURL = environment.baseURL;
+  defaultImage = './assets/default.png';
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService) { }
 
@@ -25,9 +29,14 @@ export class MovieDetailComponent implements OnInit {
       this.movie = movie;
     });
   }
-
+  
   getImageSrc(imageUrl: string): string {
-    return imageUrl || './assets/default.png';
+    return `${this.baseURL}${imageUrl}`;
+  }
+
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.defaultImage;
   }
 
   editMovie(movieId: number, event: Event): void {

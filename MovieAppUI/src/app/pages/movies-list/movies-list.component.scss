@@ -1,4 +1,5 @@
 .movies-list-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     height: calc(100vh - 64px);
@@ -6,11 +7,42 @@
 
 .movies-list {
     flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
     overflow-y: auto;
+}
+
+.error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.error-message,
+.no-data-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #ffffff;
+    text-align: center;
+}
+
+.error-message mat-icon,
+.no-data-message mat-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #ff6b6b; /* Use an appropriate color for errors */
+}
+
+.error-message p,
+.no-data-message p {
+    font-size: 18px;
+    color: #ffffff;
 }
 
 mat-paginator {
@@ -45,13 +77,10 @@ mat-paginator {
 
     .mat-paginator-navigation-button {
         background-color: #424242;
-        /* Dark background for navigation buttons */
         color: #ffca28;
-        /* Accent color for navigation buttons */
     }
 
     .mat-paginator-navigation-button[disabled] {
         color: #757575;
-        /* Muted color for disabled buttons */
     }
 }

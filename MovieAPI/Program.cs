@@ -4,6 +4,7 @@ using MovieAPI.Data;
 using MovieAPI.Services;
 using MovieAPI.Repositories;
 using MovieAPI.Extensions;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,11 +45,24 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+// Serve static files from wwwroot directory
+app.UseStaticFiles();
+
+// Serve static files from wwwroot/images directory with a specific path
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
+    RequestPath = "/images"
+});
+
 app.UseHttpsRedirection();
 
 // Use the CORS policy
 app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();

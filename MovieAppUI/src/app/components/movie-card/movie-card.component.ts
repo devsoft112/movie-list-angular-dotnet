@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -21,6 +23,9 @@ export class MovieCardComponent {
   @Input() movie: any;
   @Output() delete = new EventEmitter<number>();
 
+  baseURL = environment.baseURL;
+  defaultImage = './assets/default.png';
+
   constructor(private router: Router) { }
 
   getDisplayedGenres(genres: string[]): string[] {
@@ -28,7 +33,12 @@ export class MovieCardComponent {
   }
 
   getImageSrc(imageUrl: string): string {
-    return imageUrl || './assets/default.png';
+    return `${this.baseURL}${imageUrl}`;
+  }
+
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.defaultImage;
   }
 
   getShortDescription(description: string): string {

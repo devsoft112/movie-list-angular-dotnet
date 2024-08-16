@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 
 import { MovieService } from '../../services/movie.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-create-movie',
@@ -23,8 +24,10 @@ export class CreateMovieComponent implements OnInit {
   coverImagePreview: string | ArrayBuffer | null = null;
   isEditMode = false;
   movieId: number | null = null;
-  isDragOver = false; // New property to track drag state
+  isDragOver = false;
   removeImageFlag = false; 
+  baseURL = environment.baseURL;
+  defaultImage = './assets/default.png';
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef<HTMLInputElement>;
 
@@ -45,7 +48,6 @@ export class CreateMovieComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      console.log(params);
       this.movieId = +params.get('id')!;
       this.isEditMode = !!this.movieId;
 
@@ -57,13 +59,12 @@ export class CreateMovieComponent implements OnInit {
 
   loadMovieDetails(id: number): void {
     this.movieService.getMovieById(id).subscribe(movie => {
-      console.log('movie', movie);
       this.movieForm.patchValue({
         title: movie.title,
         description: movie.description,
         genre: movie.genre,
       });
-      this.coverImagePreview = movie.coverImage;
+      this.coverImagePreview = this.baseURL + movie.coverImage || this.defaultImage;
     });
   }
 
@@ -107,17 +108,19 @@ export class CreateMovieComponent implements OnInit {
   }
 
   triggerFileInput(): void {
-    console.log('hellowrld')
     if (this.fileInput) {
-      console.log('hello wr---df')
       this.fileInput.nativeElement.click();
     }
+  }
+
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.defaultImage;
   }
 
   removeImage(event: Event): void {
     event.preventDefault();
     event.stopPropagation(); 
-    console.log('removeImage');
     this.coverImagePreview = null;
     this.movieForm.patchValue({ coverImage: null });
     this.removeImageFlag = true;
@@ -141,7 +144,6 @@ export class CreateMovieComponent implements OnInit {
       if (coverImage) {
         formData.append('coverImage', coverImage);
       } else if (this.removeImageFlag) {
-        console.log('image removed');
         formData.append('coverImage', ''); // Send an empty string or handle as per your backend logic
       }
 

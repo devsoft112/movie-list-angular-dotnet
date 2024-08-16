@@ -1,11 +1,25 @@
 <mat-sidenav-container class="dashboard-container">
   <!-- Sidebar -->
-  <mat-sidenav #sidenav mode="side" opened class="sidebar">
+  <mat-sidenav
+    #sidenav
+    [mode]="isSmallScreen ? 'over' : 'side'"
+    [opened]="!isSmallScreen"
+    class="sidebar"
+  >
     <div class="sidebar-header">SB Space</div>
     <mat-nav-list>
-      <a mat-list-item routerLink="/"><mat-icon>movie</mat-icon> Movies List</a>
+      <a mat-list-item routerLink="/">
+        <div class="nav-item">
+          <mat-icon>movie</mat-icon>
+          <p>Movies List</p>
+        </div>
+      </a>
+
       <a mat-list-item routerLink="/create-movie">
-        <mat-icon>add</mat-icon> Add New Movie
+        <div class="nav-item">
+          <mat-icon>add</mat-icon>
+          <p>Add New Movie</p>
+        </div>
       </a>
     </mat-nav-list>
     <div class="sidebar-footer">© 2024 MovieApp</div>
@@ -19,6 +33,7 @@
         mat-icon-button
         (click)="sidenav.toggle()"
         aria-label="Toggle sidenav"
+        *ngIf="isSmallScreen"
       >
         <mat-icon>menu</mat-icon>
       </button>

@@ -101,12 +101,5 @@ yarn-error.log
 wwwroot/images/*
 !wwwroot/images/.gitkeep
 
-# Secrets and configurations
-appsettings*.json
-!appsettings.Development.json
-
-# Ignore migrations if necessary
-Migrations/
-
 # Ignore coverage reports
 coverage/
