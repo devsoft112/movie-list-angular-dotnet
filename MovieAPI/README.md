@@ -12,8 +12,8 @@ docker-compose up -d
 
 #### Access the API:
 
-- API: [http://localhost:8080](http://localhost:8080)
-- Swagger UI: [http://localhost:8080/swagger](http://localhost:8080/swagger)
+- API: [http://localhost:5103](http://localhost:5103)
+- Swagger UI: [http://localhost:5103/index.html](http://localhost:5103/index.html)
 
 ### Option 2: Running Without Docker
 
@@ -46,5 +46,5 @@ dotnet run
 
 #### Access the API:
 
-- API: [http://localhost:5000](http://localhost:5000)
-- Swagger UI: [http://localhost:5000/swagger](http://localhost:5000/swagger)
+- API: [http://localhost:5103](http://localhost:5103)
+- Swagger UI: [http://localhost:5103/index.html](http://localhost:5103/index.html)
