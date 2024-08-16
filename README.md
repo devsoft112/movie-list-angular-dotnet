@@ -1,4 +1,4 @@
-# Movie Viewing Application
+# Movie List Application
 
 This application is a comprehensive, full-stack movie viewing platform developed with Angular 18 for front-end and .NET 8 for back-end. It provides users with the ability to view a list of movies and add new ones by providing a title, description, genre, and cover image. The back-end API manages movie data stored in an SQL database.
 
