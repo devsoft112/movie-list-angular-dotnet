@@ -1,0 +1,57 @@
+.movies-list-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 64px);
+}
+
+.movies-list {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 20px;
+    overflow-y: auto;
+}
+
+mat-paginator {
+    position: sticky;
+    bottom: 0;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+
+    .mat-paginator-range-label,
+    .mat-paginator-page-size-label,
+    .mat-paginator-range-actions button {
+        color: #ffffff;
+    }
+
+    .mat-paginator-icon {
+        color: #ffffff;
+    }
+
+    .mat-select-value-text {
+        color: #ffca28;
+    }
+
+    .mat-paginator-page-size-options {
+        .mat-option {
+            background-color: #424242;
+            color: #ffffff;
+        }
+    }
+
+    .mat-paginator-navigation-button {
+        background-color: #424242;
+        /* Dark background for navigation buttons */
+        color: #ffca28;
+        /* Accent color for navigation buttons */
+    }
+
+    .mat-paginator-navigation-button[disabled] {
+        color: #757575;
+        /* Muted color for disabled buttons */
+    }
+}

@@ -1,0 +1,51 @@
+mat-form-field {
+    width: 100%;
+}
+
+.movie-form {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .file-drop-zone {
+        border: 2px dashed #cccccc;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        background-color: #f9f9f9;
+
+        p {
+            margin: 0;
+            font-size: 1rem;
+            color: #666666;
+        }
+
+        input[type='file'] {
+            display: none;
+        }
+
+        &.drop-over {
+            background-color: #e0e0e0;
+        }
+    }
+
+    .image-preview-wrapper {
+        text-align: center;
+
+        .image-preview {
+            max-width: 100%;
+            margin-top: 10px;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    }
+}

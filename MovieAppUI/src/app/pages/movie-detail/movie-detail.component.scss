@@ -1,0 +1,49 @@
+.movie-detail-card {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #2c2c2c; // Dark background
+    color: #ffffff; // Light text color
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+
+    mat-card-title {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    mat-card-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+
+        mat-chip {
+            background-color: #424242;
+            color: #ffca28;
+        }
+    }
+
+    .mat-chip-list {
+        margin: 20px 0;
+
+        mat-chip {
+            margin-right: 15px;
+        }
+    }
+
+    img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    mat-card-content {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    mat-card-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+}

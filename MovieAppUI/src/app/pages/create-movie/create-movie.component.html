@@ -1,0 +1,73 @@
+<form [formGroup]="movieForm" (ngSubmit)="submitForm()" class="movie-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input
+      matInput
+      formControlName="title"
+      placeholder="Enter the movie title"
+    />
+    <mat-icon matSuffix>movie</mat-icon>
+    <mat-hint>Enter a unique movie title</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Genres</mat-label>
+    <mat-select formControlName="genre" multiple>
+      <mat-option *ngFor="let genre of genres" [value]="genre">
+        {{ genre }}
+      </mat-option>
+    </mat-select>
+    <mat-icon matSuffix>local_offer</mat-icon>
+    <mat-hint>Select one or more genres</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Enter the movie description"
+      rows="5"
+    ></textarea>
+    <mat-icon matSuffix>description</mat-icon>
+    <mat-hint>Provide a brief summary of the movie</mat-hint>
+  </mat-form-field>
+
+  <div
+    class="file-drop-zone"
+    [class.drop-over]="isDragOver"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    (click)="triggerFileInput()"
+    *ngIf="!coverImagePreview"
+  >
+    <p>Drag and drop your cover image here, or click to select a file.</p>
+    <input
+      type="file"
+      id="coverImage"
+      (change)="onCoverImageChange($event)"
+      #fileInput
+    />
+  </div>
+
+  <div *ngIf="coverImagePreview" class="image-preview-wrapper">
+    <img
+      [src]="coverImagePreview"
+      alt="Cover Image Preview"
+      class="image-preview"
+    />
+    <button mat-button color="warn" (click)="removeImage($event)">
+      Remove Image
+    </button>
+  </div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="movieForm.invalid"
+  >
+    {{ isEditMode ? "Update Movie" : "Create Movie" }}
+  </button>
+</form>

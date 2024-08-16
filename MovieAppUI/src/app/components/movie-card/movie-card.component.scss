@@ -1,0 +1,88 @@
+.movie-card {
+    max-width: 320px;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #2c2c2c;
+    /* Dark background color */
+    color: #ffffff;
+    /* Light text color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    /* Darker shadow for better contrast */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+    }
+
+    img {
+        height: 180px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    h5 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        height: 4.2rem;
+        /* Limit the height to approximately two lines */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* Limit to 2 lines */
+        -webkit-box-orient: vertical;
+        color: #ffffff;
+        /* Ensure the title remains readable */
+    }
+
+    p {
+        font-size: 1rem;
+        color: #d3d3d3;
+        /* Light gray for description text */
+        margin-bottom: 10px;
+        min-height: 96px;
+    }
+
+    .mat-chip-list {
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        mat-chip {
+            margin-right: 4px;
+            background-color: #424242;
+            color: #ffca28;
+        }
+    }
+
+    .mat-card-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        margin-top: auto;
+        width: 100%;
+
+        button {
+            text-transform: uppercase;
+            margin-right: 10px;
+            flex: 1;
+            max-width: 45%;
+            color: #ffffff;
+            /* Button text color */
+        }
+
+        button[color="primary"] {
+            background-color: #00796b;
+            /* Primary button color */
+        }
+
+        button[color="warn"] {
+            background-color: #d32f2f;
+            /* Warning button color */
+        }
+    }
+}

@@ -15,9 +15,16 @@ namespace MovieAPI.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
+        public async Task<PaginatedResponse<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize)
         {
-            return await _context.Movies.ToListAsync();
+            var totalCount = await _context.Movies.CountAsync();
+            var movies = await _context.Movies
+                .OrderByDescending(m => m.Id)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedResponse<Movie>(movies, totalCount);
         }
 
         public async Task<Movie?> GetMovieByIdAsync(int id)

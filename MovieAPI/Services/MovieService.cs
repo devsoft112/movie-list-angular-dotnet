@@ -11,16 +11,17 @@ namespace MovieAPI.Services
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;
-        private readonly string _imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+        private readonly string _imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "..", "MovieAppUI", "public");
+        private readonly string _imagePathPrefix = "./";
 
         public MovieService(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
 
-        public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
+        public async Task<PaginatedResponse<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize)
         {
-            return await _movieRepository.GetAllMoviesAsync();
+            return await _movieRepository.GetAllMoviesAsync(pageNumber, pageSize);
         }
 
         public async Task<Movie?> GetMovieByIdAsync(int id)
@@ -62,7 +63,7 @@ namespace MovieAPI.Services
             }
             else
             {
-                movie.CoverImage = existingMovie.CoverImage;
+                movie.CoverImage = string.Empty;
             }
 
             existingMovie.Title = movie.Title;
@@ -109,7 +110,7 @@ namespace MovieAPI.Services
                 await coverImage.CopyToAsync(stream);
             }
 
-            return fileName;
+            return $"{_imagePathPrefix}{fileName}";
         }
     }
 }

@@ -20,24 +20,17 @@ namespace MovieAPI.Controllers
             _movieService = movieService;
         }
 
-        /// <summary>
-        /// Retrieves a list of all movies.
-        /// </summary>
-        /// <returns>A list of movies</returns>
         [HttpGet]
-        [SwaggerOperation(Summary = "Retrieves a list of all movies.", Description = "Returns a list of movies.")]
-        [SwaggerResponse(StatusCodes.Status200OK, "Successfully retrieved movies.", typeof(IEnumerable<Movie>))]
-        public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
+        [SwaggerOperation(Summary = "Retrieves a paginated list of all movies.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Successfully retrieved movies.", typeof(PaginatedResponse<Movie>))]
+        public async Task<ActionResult<PaginatedResponse<Movie>>> GetMovies(
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
         {
-            var movies = await _movieService.GetAllMoviesAsync();
-            return Ok(movies);
+            var paginatedMovies = await _movieService.GetAllMoviesAsync(pageNumber, pageSize);
+            return Ok(paginatedMovies);
         }
 
-        /// <summary>
-        /// Retrieves a specific movie by its ID.
-        /// </summary>
-        /// <param name="id">The ID of the movie</param>
-        /// <returns>A movie</returns>
         [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Retrieves a specific movie by its ID.", Description = "Returns the requested movie.")]
         [SwaggerResponse(StatusCodes.Status200OK, "Successfully retrieved movie.", typeof(Movie))]
@@ -54,13 +47,6 @@ namespace MovieAPI.Controllers
             return Ok(movie);
         }
 
-        /// <summary>
-        /// Creates a new movie.
-        /// </summary>
-        /// <param name="movie">The movie to create</param>
-        /// <param name="coverImage">The cover image file</param>
-        /// <param name="genre">The genre string, comma-separated</param>
-        /// <returns>The newly created movie</returns>
         [HttpPost]
         [SwaggerOperation(Summary = "Creates a new movie.", Description = "Creates a new movie and returns the created movie.")]
         [SwaggerResponse(StatusCodes.Status201Created, "Successfully created movie.", typeof(Movie))]
@@ -78,13 +64,6 @@ namespace MovieAPI.Controllers
             return CreatedAtAction(nameof(GetMovie), new { id = createdMovie.Id }, createdMovie);
         }
 
-        /// <summary>
-        /// Updates an existing movie.
-        /// </summary>
-        /// <param name="id">The ID of the movie to update</param>
-        /// <param name="movie">The updated movie data</param>
-        /// <param name="coverImage">The updated cover image file</param>
-        /// <param name="genre">The genre string, comma-separated</param>
         [HttpPut("{id}")]
         [SwaggerOperation(Summary = "Updates an existing movie.", Description = "Updates the specified movie with new data.")]
         [SwaggerResponse(StatusCodes.Status204NoContent, "Successfully updated movie.")]
@@ -116,10 +95,6 @@ namespace MovieAPI.Controllers
             return NoContent();
         }
 
-        /// <summary>
-        /// Deletes a specific movie by its ID.
-        /// </summary>
-        /// <param name="id">The ID of the movie to delete</param>
         [HttpDelete("{id}")]
         [SwaggerOperation(Summary = "Deletes a specific movie by its ID.", Description = "Deletes the specified movie.")]
         [SwaggerResponse(StatusCodes.Status204NoContent, "Successfully deleted movie.")]

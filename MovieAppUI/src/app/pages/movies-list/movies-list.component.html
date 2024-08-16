@@ -1,0 +1,18 @@
+<div class="movies-list-container">
+  <div class="movies-list">
+    <app-movie-card
+      *ngFor="let movie of movies"
+      [movie]="movie"
+      (delete)="deleteMovie(movie.id)"
+    >
+    </app-movie-card>
+  </div>
+
+  <mat-paginator
+    [length]="totalMovies"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

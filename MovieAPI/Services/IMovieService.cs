@@ -6,7 +6,7 @@ namespace MovieAPI.Services
 {
     public interface IMovieService
     {
-        Task<IEnumerable<Movie>> GetAllMoviesAsync();
+        Task<PaginatedResponse<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize);
         Task<Movie?> GetMovieByIdAsync(int id);
         Task<Movie> CreateMovieAsync(Movie movie, IFormFile coverImage);
         Task UpdateMovieAsync(Movie movie, IFormFile? coverImage);

@@ -1,0 +1,35 @@
+<mat-card class="movie-card" (click)="navigateToDetail(movie.id)">
+  <img
+    mat-card-image
+    [src]="getImageSrc(movie.coverImage)"
+    alt="{{ movie.title }}"
+  />
+
+  <mat-card-content>
+    <h5>{{ movie.title }}</h5>
+    <p>{{ getShortDescription(movie.description) }}</p>
+    <div class="mat-chip-list">
+        <mat-chip *ngFor="let genre of getDisplayedGenres(movie.genre)">
+        {{ genre }}
+        </mat-chip>
+        <span *ngIf="movie.genre.length > 3">more...</span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="editMovie(movie.id, $event)"
+    >
+      Edit
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="deleteMovie(movie.id, $event)"
+    >
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,24 @@
+<mat-card class="movie-detail-card">
+  <mat-card-header>
+    <mat-card-title>{{ movie.title }}</mat-card-title>
+    <mat-card-subtitle>
+      <div class="mat-chip-list">
+        <mat-chip *ngFor="let genre of movie.genre">{{ genre }}</mat-chip>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    [src]="getImageSrc(movie.coverImage)"
+    alt="{{ movie.title }}"
+  />
+  <mat-card-content>
+    <p>{{ movie.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="navigateToList()">Back to List</button>
+    <button mat-button color="accent" (click)="editMovie(movie.id, $event)">
+      Edit
+    </button>
+  </mat-card-actions>
+</mat-card>

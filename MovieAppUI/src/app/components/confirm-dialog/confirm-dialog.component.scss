@@ -1,0 +1,29 @@
+mat-dialog-content {
+    font-size: 16px;
+    color: #333;
+}
+
+mat-dialog-actions {
+    margin-top: 20px;
+}
+
+.dialog-cancel-button {
+    margin-right: 10px;
+}
+
+.mat-dialog-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.mat-dialog-container {
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    text-transform: none;
+}
