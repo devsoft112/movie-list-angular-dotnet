@@ -24,11 +24,11 @@ docker-compose up -d
 
 #### Update the Connection String:
 
-Modify the `ConnectionStrings.MovieDbConnection` in `appsettings.json`:
+Modify the `ConnectionStrings.MovieDbConnection` in `appsettings.Development.json`:
 
 ```json
 "ConnectionStrings": {
-  "MovieDbConnection": "Host=localhost;Database=movie_db;Username=postgres;Password=yourpassword"
+  "MovieDbConnection": "Host=localhost;Database=movie_db;Username=[username];Password=[password]"
 }
 ```
 

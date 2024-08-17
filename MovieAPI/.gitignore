@@ -103,3 +103,7 @@ wwwroot/images/*
 
 # Ignore coverage reports
 coverage/
+
+# Secrets and configurations
+appsettings*.json
+!appsettings.Development.json

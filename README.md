@@ -64,6 +64,13 @@ The project is divided into two main parts:
 
 1. Set Up PostgreSQL: Ensure PostgreSQL is installed and running. Create a database named `movie_db`.
 2. Update the Connection String in `appsettings.json`.
+Modify the `ConnectionStrings.MovieDbConnection` in `appsettings.Development.json`:
+
+```json
+"ConnectionStrings": {
+  "MovieDbConnection": "Host=localhost;Database=movie_db;Username=[username];Password=[password]"
+}
+```
 3. Run the Migrations: `dotnet ef database update`
 4. Run the API: `dotnet run`
 5. Access the API at http://localhost:5103 and Swagger UI at http://localhost:5103/index.html
