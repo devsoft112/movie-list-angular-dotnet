@@ -71,6 +71,13 @@ namespace MovieAPI.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "Movie not found.")]
         public async Task<IActionResult> PutMovie(int id, [FromForm] Movie movie, [FromForm] IFormFile? coverImage, [FromForm] string genre)
         {
+            Console.WriteLine($"Movie ID: {id}");
+            Console.WriteLine($"Title: {movie.Title}");
+            Console.WriteLine($"Description: {movie.Description}");
+            Console.WriteLine($"Genre: {string.Join(", ", movie.Genre)}");
+            Console.WriteLine($"CoverImage: {coverImage?.FileName ?? "No image uploaded"}");
+            Console.WriteLine($"Existing CoverImage Path: {movie.CoverImage}");
+            
             if (id != movie.Id)
             {
                 return BadRequest();

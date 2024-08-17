@@ -47,9 +47,9 @@ namespace MovieAPI.Services
                 throw new KeyNotFoundException();
             }
 
-            if (coverImage != null)
+            if (coverImage != null && coverImage.Length > 0)
             {
-                // Optionally, delete the old image if a new one is uploaded
+                // If a new file is provided, delete the old image and save the new one
                 if (!string.IsNullOrEmpty(existingMovie.CoverImage))
                 {
                     var oldImagePath = Path.Combine(_imageDirectory, existingMovie.CoverImage);
@@ -61,11 +61,18 @@ namespace MovieAPI.Services
 
                 movie.CoverImage = await UploadCoverImageAsync(coverImage);
             }
-            else
+            else if (string.IsNullOrEmpty(movie.CoverImage))
             {
+                // If the CoverImage is an empty string, it means the image should be removed
                 movie.CoverImage = string.Empty;
             }
+            else
+            {
+                // Retain the existing image path if it's not removed
+                movie.CoverImage = existingMovie.CoverImage;
+            }
 
+            // Update other properties
             existingMovie.Title = movie.Title;
             existingMovie.Description = movie.Description;
             existingMovie.Genre = movie.Genre;
@@ -73,6 +80,7 @@ namespace MovieAPI.Services
 
             await _movieRepository.UpdateMovieAsync(existingMovie);
         }
+
 
         public async Task DeleteMovieAsync(int id)
         {

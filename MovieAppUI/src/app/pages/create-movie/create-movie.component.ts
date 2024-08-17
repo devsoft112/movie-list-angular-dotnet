@@ -63,10 +63,12 @@ export class CreateMovieComponent implements OnInit {
         title: movie.title,
         description: movie.description,
         genre: movie.genre,
+        coverImage: movie.coverImage ? movie.coverImage : null
       });
-      this.coverImagePreview = this.baseURL + movie.coverImage || this.defaultImage;
+      this.coverImagePreview = movie.coverImage ? this.baseURL + movie.coverImage : this.defaultImage;
     });
   }
+  
 
   onCoverImageChange(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -129,22 +131,27 @@ export class CreateMovieComponent implements OnInit {
   submitForm(): void {
     if (this.movieForm.valid) {
       const formData = new FormData();
-
+  
       if (this.isEditMode && this.movieId !== null) {
         formData.append('id', this.movieId.toString());
       }
-
+  
       formData.append('title', this.movieForm.get('title')?.value);
       formData.append('description', this.movieForm.get('description')?.value);
-
+  
       const genreString = this.movieForm.get('genre')?.value.join(',');
       formData.append('genre', genreString);
-
+  
       const coverImage = this.movieForm.get('coverImage')?.value;
-      if (coverImage) {
+  
+      if (coverImage instanceof File) {
         formData.append('coverImage', coverImage);
       } else if (this.removeImageFlag) {
-        formData.append('coverImage', ''); // Send an empty string or handle as per your backend logic
+        formData.append('coverImage', ''); // Send an empty string to indicate removal
+      } else if (!coverImage) {
+        formData.append('coverImage', this.movieForm.get('coverImage')?.value || ''); // Handle cases where no image change
+      } else {
+        formData.append('coverImage', coverImage);
       }
 
       if (this.isEditMode && this.movieId !== null) {
@@ -164,4 +171,5 @@ export class CreateMovieComponent implements OnInit {
       }
     }
   }
+  
 }
